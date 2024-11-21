@@ -10,13 +10,11 @@ function App() {
     const [page, setPage] = useState(navItems[0]);
 
     return (
-        <div>
-            <SWContext.Provider value={{page, changePage: setPage}}>
-                <Header/>
-                <Main/>
-            </SWContext.Provider>
+        <>
+            <Header/>
+            <Main/>
             <Footer/>
-        </div>
+        </>
     )
 }
 
