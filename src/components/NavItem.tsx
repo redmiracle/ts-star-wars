@@ -1,5 +1,3 @@
-import {useContext} from "react";
-import {SWContext} from "../utils/context.ts";
 import {Item} from "../utils/types";
 import {NavLink} from "react-router-dom";
 interface Props {

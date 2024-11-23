@@ -9,7 +9,7 @@ export interface Item{
 }
 export interface Hero {
     name:string,
-    image:string,
+    img:string,
     url:string,
 }
 
