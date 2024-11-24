@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {characters, defaultsHero, period_month} from "../utils/constants.ts";
 import {useParams} from "react-router-dom";
+import {SWContext} from "../utils/context.ts";
 interface heroType {
     name: string;
     gender: string;
@@ -16,6 +17,7 @@ const AboutMe = () => {
     const [hero, setHero] = useState<heroType>();
     let {heroId=defaultsHero} = useParams();
     console.log(heroId);
+    const {setHeaderName}=useContext(SWContext);
     useEffect(() => {
         if(!characters[heroId]){
             heroId=defaultsHero;
@@ -23,6 +25,7 @@ const AboutMe = () => {
         const hero = JSON.parse(localStorage.getItem(heroId)!);
         if (hero && ((Date.now() - hero.timestamp) < period_month)) {
             setHero(hero.payload);
+            setHeaderName(hero.payload.name);
         } else {
             fetch(characters[heroId].url)
                 .then(response => response.json())
@@ -38,13 +41,16 @@ const AboutMe = () => {
                         eye_color: data.eye_color
                     }
                     setHero(info);
+                    setHeaderName(info.name);
                     localStorage.setItem(heroId, JSON.stringify({
                         payload: info,
                         timestamp: Date.now()
                     }));
                 })
         }
-
+        return()=>{
+            setHeaderName(characters[defaultsHero].name);
+        }
     }, [])
 
     return (

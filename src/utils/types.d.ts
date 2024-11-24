@@ -1,6 +1,6 @@
 export interface SWcontextValue{
-    page:string,
-    changePage:(page:string)=>void,
+    headerName: string;
+    setHeaderName: (name: string) => void;
 }
 
 export interface Item{
